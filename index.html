@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Workout Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+
+    <div id="app-container">
+
+        <div id="plan-list-view" class="view active-view">
+            <h1>My Workout Plans</h1>
+            <ul id="plan-list">
+                <li class="no-plans">No plans created yet.</li>
+            </ul>
+            <button id="btn-show-create-plan">Create New Plan</button>
+        </div>
+
+        <div id="create-edit-plan-view" class="view">
+            <h2 id="plan-form-title">Create New Plan</h2>
+            <form id="plan-form">
+                <input type="hidden" id="plan-id"> <label for="plan-name">Plan Name:</label>
+                <input type="text" id="plan-name" required placeholder="e.g., Gym Bulk, Home Cardio">
+
+                <label for="plan-type">Plan Type:</label>
+                <select id="plan-type" required>
+                    <option value="gym">Gym</option>
+                    <option value="home">Home</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="plan-duration">Duration (Weeks):</label>
+                <input type="number" id="plan-duration" min="1" max="52" required value="4">
+
+                <div class="form-buttons">
+                    <button type="submit" id="btn-save-plan-details">Save & Add Exercises</button>
+                    <button type="button" id="btn-cancel-plan-details" class="btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="edit-exercises-view" class="view">
+            <h2 id="edit-exercises-title">Edit Plan: <span>Plan Name</span></h2>
+             <p>Total Weeks: <span id="total-weeks-display"></span></p>
+
+            <div class="week-selector">
+                <label for="week-select">Select Week:</label>
+                <select id="week-select">
+                    </select>
+                <button id="btn-replicate-week" class="btn-small">Replicate This Week</button>
+            </div>
+
+             <div id="replicate-options" class="hidden">
+                <p>Replicate exercises from Week <span id="replicate-source-week"></span> to:</p>
+                <div id="replicate-target-weeks">
+                    </div>
+                <button id="btn-confirm-replicate">Confirm Replication</button>
+                <button id="btn-cancel-replicate" class="btn-secondary btn-small">Cancel</button>
+            </div>
+
+
+            <h3>Exercises for Week <span id="current-week-display">1</span></h3>
+            <ul id="exercise-list-for-week">
+                </ul>
+
+            <h4>Add New Exercise</h4>
+            <form id="add-exercise-form">
+                 <label for="exercise-select">Choose Exercise:</label>
+                 <select id="exercise-select">
+                     <option value="">-- Select Predefined --</option>
+                     </select>
+                 <span>OR</span>
+                 <input type="text" id="custom-exercise-name" placeholder="Enter Custom Exercise">
+
+                 <label for="exercise-sets">Sets:</label>
+                 <input type="number" id="exercise-sets" min="1" value="3" required>
+
+                 <label for="exercise-reps">Reps:</label>
+                 <input type="text" id="exercise-reps" placeholder="e.g., 8-12" required> <label for="exercise-weight">Weight (kg/lbs/bodyweight):</label>
+                 <input type="text" id="exercise-weight" placeholder="e.g., 50kg, BW">
+
+                 <label for="exercise-comments">Comments:</label>
+                 <textarea id="exercise-comments" rows="2" placeholder="e.g., Focus on form, Drop set last"></textarea>
+
+                 <button type="submit" id="btn-add-exercise">Add Exercise to Week</button>
+            </form>
+
+
+            <div class="form-buttons">
+                <button id="btn-finish-editing-plan" class="btn-primary">Done Editing</button>
+                 <button id="btn-view-plan-overview" class="btn-secondary">View Plan Overview</button>
+            </div>
+        </div>
+
+        <div id="workout-session-view" class="view">
+            <h2 id="workout-session-title">Workout: <span>Plan Name</span> - Week <span>X</span></h2>
+            <p>Date: <span id="workout-date"></span></p>
+             <div class="progress-container">
+                <label>Workout Progress:</label>
+                <progress id="workout-progress-bar" value="0" max="100"></progress>
+                <span id="workout-progress-text">0%</span>
+            </div>
+            <ul id="workout-exercise-list">
+                </ul>
+            <div class="form-buttons">
+                 <button id="btn-finish-workout" class="btn-primary">Finish Workout</button>
+                 <button id="btn-back-to-plan-list-from-workout" class="btn-secondary">Back to Plans</button>
+            </div>
+        </div>
+
+        <div id="plan-overview-view" class="view">
+            <h2 id="overview-title">Plan Overview: <span>Plan Name</span></h2>
+            <div id="overview-content">
+                </div>
+             <div class="form-buttons">
+                <button id="btn-back-to-plan-list-from-overview" class="btn-primary">Back to Plans</button>
+                <button id="btn-edit-plan-from-overview" class="btn-secondary">Edit This Plan</button>
+            </div>
+        </div>
+
+    </div> <script src="script.js"></script>
+</body>
+</html>

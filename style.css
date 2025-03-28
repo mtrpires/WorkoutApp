@@ -1,0 +1,374 @@
+/* Basic Reset & Root Variables */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --background-color: #ffffff;
+    --text-color: #212529;
+    --border-color: #dee2e6;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --border-radius: 0.3rem;
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px; /* Base font size */
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overscroll-behavior-y: contain; /* Prevent pull-to-refresh */
+}
+
+#app-container {
+    max-width: 800px; /* Max width for larger screens */
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* View Management */
+.view {
+    display: none; /* Hide views by default */
+    padding: 1rem 0;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.view.active-view {
+    display: block; /* Show the active view */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Headings and Text */
+h1, h2, h3, h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.3rem; margin-top: 1.5rem; }
+h4 { font-size: 1.1rem; margin-top: 1rem; }
+
+p {
+    margin-bottom: 0.8rem;
+}
+
+/* Buttons */
+button {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    color: white;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    box-shadow: var(--box-shadow);
+}
+button:hover, button:focus {
+    background-color: #0056b3; /* Darker primary */
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+button:active {
+     background-color: #004085; /* Even darker */
+     box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+button.btn-secondary {
+    background-color: var(--secondary-color);
+}
+button.btn-secondary:hover {
+    background-color: #5a6268;
+}
+button.btn-secondary:active {
+    background-color: #4e555b;
+}
+
+button.btn-danger {
+    background-color: var(--danger-color);
+}
+button.btn-danger:hover {
+    background-color: #c82333;
+}
+
+button.btn-small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+.form-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+    gap: 0.5rem;
+}
+
+/* Forms */
+label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    background-color: white; /* Ensure background is white */
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+select {
+    appearance: none; /* Custom select arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.41 0L6 4.58L10.59 0L12 1.41L6 7.41L0 1.41L1.41 0Z" fill="%236c757d"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 12px 8px;
+    padding-right: 2.5rem; /* Space for arrow */
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 60px;
+}
+
+#add-exercise-form span {
+    display: block;
+    text-align: center;
+    margin: 0.5rem 0;
+    color: var(--secondary-color);
+}
+
+/* Lists (Plan List, Exercise List) */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+#plan-list li,
+#exercise-list-for-week li,
+#workout-exercise-list li {
+    background-color: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: var(--box-shadow);
+    position: relative; /* For positioning buttons */
+    transition: background-color 0.2s ease;
+}
+#plan-list li:hover {
+    background-color: #e9ecef; /* Slightly darker on hover */
+}
+
+#plan-list li .plan-actions,
+#exercise-list-for-week li .exercise-actions {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+#plan-list li.no-plans {
+    text-align: center;
+    color: var(--secondary-color);
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* Exercise Item Details */
+.exercise-details {
+    margin-bottom: 0.5rem;
+}
+.exercise-details span {
+    display: inline-block;
+    margin-right: 1rem;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+}
+.exercise-details span strong {
+    color: var(--text-color);
+}
+.exercise-comments {
+    font-size: 0.85rem;
+    color: var(--secondary-color);
+    margin-top: 0.3rem;
+    font-style: italic;
+}
+
+/* Workout Session Specifics */
+#workout-exercise-list li {
+    padding-bottom: 0.5rem; /* Less padding at bottom */
+}
+.set-tracker {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+.set-tracker label {
+    margin-bottom: 0;
+    font-weight: normal;
+    margin-right: 0.5rem;
+}
+.set-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary-color); /* Style checkbox color */
+}
+.set-completed-label {
+     text-decoration: line-through;
+     color: var(--secondary-color);
+}
+
+/* Progress Bar */
+.progress-container {
+    margin-bottom: 1.5rem;
+}
+.progress-container label {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+progress {
+    width: 100%;
+    height: 1.5rem;
+    appearance: none; /* Needed for styling */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Ensure inner bar respects border-radius */
+}
+/* Styling for Webkit browsers (Chrome, Safari) */
+progress::-webkit-progress-bar {
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+}
+progress::-webkit-progress-value {
+    background-color: var(--success-color);
+    border-radius: var(--border-radius);
+    transition: width 0.3s ease;
+}
+/* Styling for Firefox */
+progress::-moz-progress-bar {
+    background-color: var(--success-color);
+    border-radius: var(--border-radius);
+    transition: width 0.3s ease;
+}
+#workout-progress-text {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 0.3rem;
+    color: var(--dark-color);
+}
+
+
+/* Week Selector & Replication */
+.week-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+.week-selector label {
+    margin-bottom: 0; /* Remove default margin */
+}
+.week-selector select {
+    width: auto; /* Don't take full width */
+    min-width: 100px;
+    margin-bottom: 0;
+}
+
+#replicate-options {
+    background-color: var(--light-color);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+#replicate-target-weeks label {
+    display: inline-block; /* Horizontal layout */
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+}
+#replicate-target-weeks input[type="checkbox"] {
+    margin-right: 0.3rem;
+     width: auto; /* Override default width */
+}
+
+/* Plan Overview */
+#overview-content .week-overview {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+#overview-content .week-overview:last-child {
+    border-bottom: none;
+}
+#overview-content h4 {
+    color: var(--secondary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.3rem;
+}
+#overview-content ul {
+     margin-top: 0.5rem;
+}
+#overview-content li {
+     font-size: 0.9rem;
+     padding: 0.3rem 0;
+}
+#overview-content li span { /* Exercise details in overview */
+    font-size: 0.85rem;
+    color: var(--secondary-color);
+    margin-left: 0.5rem;
+}
+
+
+/* Utility Classes */
+.hidden {
+    display: none !important; /* Use !important to override other display properties */
+}
+.text-danger {
+    color: var(--danger-color);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
